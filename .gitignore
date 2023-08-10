@@ -1,0 +1,10 @@
+logs/
+build/
+dist/
+bin/
+**/results
+.idea/
+.DS_Store
+.gradle/
+screenshots/
+.env
