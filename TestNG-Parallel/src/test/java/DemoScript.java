@@ -37,18 +37,19 @@ public class DemoScript {
         this.browser = browser;
         Map<String, String> envMap = System.getenv();
         this.PROJECT_TOKEN = envMap.getOrDefault("PROJECT_TOKEN", "");
-        this.resolutions = Arrays.stream(resolutionsCSV.split(",")).map((resolution) ->new Dimension(Integer.valueOf(resolution.split("x")[0]), Integer.valueOf(resolution.split("x")[1]))).toArray(Dimension[]::new);
+        this.resolutions = Arrays.stream(resolutionsCSV.split(",")).map((resolution) ->new Dimension(Integer.parseInt(resolution.split("x")[0]), Integer.parseInt(resolution.split("x")[1]))).toArray(Dimension[]::new);
     }
 
     @AfterTest
     public void tearDown() {
-        driver.close();
+        if (driver != null) {
+            driver.close();
+        }
     }
 
     @Test(invocationCount = 10, threadPoolSize = 10)
     public void DemoScript(ITestContext ctx) throws Exception {
-        WebDriver driver = null;
-        driver = setupBrowserDriver(browser, driver);
+        WebDriver driver = setupBrowserDriver(browser, null);
         String suiteName = ctx.getCurrentXmlTest().getSuite().getName();
         VisualTest visualTest = new VisualTest(driver, buildSettings(suiteName, browser));
         for (Dimension resolution : this.resolutions) {
