@@ -47,6 +47,7 @@ public class DemoScript {
 
     @Test(invocationCount = 10, threadPoolSize = 10)
     public void DemoScript(ITestContext ctx) throws Exception {
+        WebDriver driver = null;
         driver = setupBrowserDriver(browser, driver);
         String suiteName = ctx.getCurrentXmlTest().getSuite().getName();
         VisualTest visualTest = new VisualTest(driver, buildSettings(suiteName, browser));
