@@ -1,1 +1,0 @@
-# visualtest-java-examples
