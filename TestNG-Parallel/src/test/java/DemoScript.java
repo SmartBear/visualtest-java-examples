@@ -46,7 +46,7 @@ public class DemoScript {
         driver.close();
     }
 
-    @Test
+    @Test(invocationCount = 10)
     public void DemoScript(ITestContext ctx) throws Exception {
         String suiteName = ctx.getCurrentXmlTest().getSuite().getName();
         VisualTest visualTest = new VisualTest(driver, buildSettings(suiteName, browser));
