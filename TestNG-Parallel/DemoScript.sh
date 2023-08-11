@@ -1,2 +1,2 @@
-export PROJECT_TOKEN=<INSERT_PROJECT_TOKEN>
+export PROJECT_TOKEN=pavEDJj0/cziXJHd3tW0=_dev
 mvn -P ExecuteTestSuite test

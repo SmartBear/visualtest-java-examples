@@ -2,6 +2,7 @@ logs/
 build/
 dist/
 bin/
+target/
 **/results
 .idea/
 .DS_Store
