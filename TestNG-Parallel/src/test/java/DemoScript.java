@@ -55,7 +55,6 @@ public class DemoScript {
         for (Dimension resolution : this.resolutions) {
             driver.manage().window().setSize(resolution);
             driver.get(this.url);
-            Thread.sleep(2000); //some pages have a slight loading time
             String imageName = String.format("DemoProject-%s-%s", browser, resolution);
             visualTest.capture(imageName);
         }
