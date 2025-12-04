@@ -43,11 +43,11 @@ public class DemoScript {
     @AfterTest
     public void tearDown() {
         if (driver != null) {
-            driver.close();
+            driver.quit();
         }
     }
 
-    @Test(invocationCount = 10, threadPoolSize = 10)
+    @Test(invocationCount = 5, threadPoolSize = 5)
     public void DemoScript(ITestContext ctx) throws Exception {
         WebDriver driver = setupBrowserDriver(browser, null);
         String suiteName = ctx.getCurrentXmlTest().getSuite().getName();
@@ -59,6 +59,7 @@ public class DemoScript {
             String imageName = String.format("DemoProject-%s-%s", browser, resolution);
             visualTest.capture(imageName);
         }
+
     }
 
     public HashMap<String, Object> buildSettings(String suiteName, String browser) {
@@ -81,15 +82,15 @@ public class DemoScript {
                 if (browser.equalsIgnoreCase("firefox")) {
                     WebDriverManager.firefoxdriver().setup();
                     FirefoxOptions options = new FirefoxOptions();
-                    options.setHeadless(true);
+                    options.addArguments("--headless");
                     driver = new FirefoxDriver(options);
                 } else if (browser.equalsIgnoreCase("chrome")) {
-                    WebDriverManager.chromedriver().setup();
+//                    WebDriverManager.chromedriver().setup();
                     ChromeOptions options = new ChromeOptions();
-                    options.addArguments("--remote-allow-origins=*");
-                    options.addArguments("--disable-gpu");
+//                    options.addArguments("--remote-allow-origins=*");
+//                    options.addArguments("--disable-gpu");
                     // Mobile web capabilities
-                    options.setHeadless(true);
+                    options.addArguments("--headless");
                     driver = new ChromeDriver(options);
                 } else if (browser.equalsIgnoreCase("safari")) {
                     if(!System.getProperty("os.name").equals("Mac OS X")){
@@ -106,14 +107,14 @@ public class DemoScript {
                     EdgeOptions options = new EdgeOptions();
                     options.addArguments("--disable-gpu");
                     options.addArguments("--remote-allow-origins=*");
-                    options.setHeadless(true);
+                    options.addArguments("--headless");
                     driver = new EdgeDriver(options);
                 } else {
                     WebDriverManager.chromedriver().setup();
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--remote-allow-origins=*");
                     options.addArguments("--disable-gpu");
-                    options.setHeadless(true);
+                    options.addArguments("--headless");
                     driver = new ChromeDriver(options);
                 }
                 passed = true;
